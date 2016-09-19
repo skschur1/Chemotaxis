@@ -1,7 +1,8 @@
 Bacteria bob;
 Bacteria [] colonies;
-int colonyNum = 1;
-
+int colonyNum = 2000;
+int foodX = 300;
+int foodY = 300;
  void setup()   
  {     
  	size(600,600);
@@ -11,11 +12,12 @@ int colonyNum = 1;
  	{
  		colonies[i] = new Bacteria(300,300);
  	}
- 	 	bob = new Bacteria(300, 300);
+ 	 bob = new Bacteria(300, 300);
  }   
  void draw()   
  {    
- 	background(0);
+ 	background(255);
+ 	food();
  	for(int i = 0; i < colonies.length; i++)
  	{
  		colonies[i].move();
@@ -24,10 +26,6 @@ int colonyNum = 1;
  	bob.move();
  	bob.show();
  }  
- void mousePressed()
- {
- 	colonyNum ++;
- }
  class Bacteria    
  {     
  	int bacX, bacY;
@@ -38,12 +36,50 @@ int colonyNum = 1;
  	}
  	void move()
  	{
- 		bacX = bacX + (int)(Math.random()*9) - 4;
- 		bacY = bacY + (int)(Math.random()*9) - 4;
+ 		if(bacX >= foodX)
+ 		{
+ 			bacX = bacX - (int)(Math.random()*9);
+ 		}
+ 		else 
+ 		{
+ 			bacX = bacX + (int)(Math.random()*9);	
+ 		}
+ 		if(bacY >= foodY)
+ 		{
+ 			bacY = bacY - (int)(Math.random()*9);
+ 		}
+ 		else
+ 		{
+ 			bacY = bacY + (int)(Math.random()*9);	
+ 		}
  	}
  	void show()
  	{
- 		fill(255, 0,0);
+ 		fill((int)(Math.random()*156),(int)(Math.random()*156),(int)(Math.random()*156));
  		ellipse(bacX, bacY, 10, 10);
  	}
- }    
+ }
+ void food()
+ {
+ 	fill(0, 255, 0);
+ 	ellipse(foodX, foodY, 50, 50);
+ }  
+ void keyPressed()
+ {
+ 	if(keyCode == UP)
+ 	{
+ 		foodY-=5;
+ 	}
+ 	else if (keyCode == DOWN)
+ 	{
+ 		foodY+=5;
+ 	}
+ 	else if (keyCode == LEFT)
+ 	{
+ 		foodX-=5;	
+ 	}
+ 	else if ( keyCode == RIGHT)
+ 	{
+ 		foodX+=5;
+ 	}
+ }
