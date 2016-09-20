@@ -1,18 +1,15 @@
-Bacteria bob;
 Bacteria [] colonies;
-int colonyNum = 2000;
 int foodX = 300;
 int foodY = 300;
  void setup()   
  {     
  	size(600,600);
  	frameRate(20); 
- 	colonies = new Bacteria[colonyNum];
+ 	colonies = new Bacteria[200];
  	for(int i = 0; i < colonies.length; i++)
  	{
  		colonies[i] = new Bacteria(300,300);
  	}
- 	 bob = new Bacteria(300, 300);
  }   
  void draw()   
  {    
@@ -20,19 +17,21 @@ int foodY = 300;
  	food();
  	for(int i = 0; i < colonies.length; i++)
  	{
- 		colonies[i].move();
+ 		if (abs(mouseX - colonies[i].bacX) <= 50 || abs(mouseY - colonies[i].bacY) <= 50)
+ 			colonies[i].run();
+ 		else
+ 			colonies[i].move();
  		colonies[i].show();
  	}
- 	bob.move();
- 	bob.show();
  }  
  class Bacteria    
  {     
- 	int bacX, bacY;
+ 	int bacX, bacY, bacColor;
  	Bacteria(int myX, int myY)
  	{
  		bacX = myX;
  		bacY = myY;
+ 		bacColor = color((int)(Math.random()*156),(int)(Math.random()*156),(int)(Math.random()*156));
  	}
  	void move()
  	{
@@ -53,9 +52,28 @@ int foodY = 300;
  			bacY = bacY + (int)(Math.random()*9);	
  		}
  	}
+ 	void run()
+ 	{
+ 		if(bacX <= mouseX)
+ 		{
+ 			bacX = bacX - (int)(Math.random()*9);
+ 		}
+ 		else 
+ 		{
+ 			bacX = bacX + (int)(Math.random()*9);	
+ 		}
+ 		if(bacY <= mouseY)
+ 		{
+ 			bacY = bacY - (int)(Math.random()*9);
+ 		}
+ 		else
+ 		{
+ 			bacY = bacY + (int)(Math.random()*9);	
+ 		}
+ 	}
  	void show()
  	{
- 		fill((int)(Math.random()*156),(int)(Math.random()*156),(int)(Math.random()*156));
+ 		fill(bacColor);
  		ellipse(bacX, bacY, 10, 10);
  	}
  }
@@ -68,18 +86,18 @@ int foodY = 300;
  {
  	if(keyCode == UP)
  	{
- 		foodY-=5;
+ 		foodY-=8;
  	}
  	else if (keyCode == DOWN)
  	{
- 		foodY+=5;
+ 		foodY+=8;
  	}
  	else if (keyCode == LEFT)
  	{
- 		foodX-=5;	
+ 		foodX-=8;	
  	}
  	else if ( keyCode == RIGHT)
  	{
- 		foodX+=5;
+ 		foodX+=8;
  	}
  }
