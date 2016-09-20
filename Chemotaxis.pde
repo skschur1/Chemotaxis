@@ -17,7 +17,7 @@ int foodY = 300;
  	food();
  	for(int i = 0; i < colonies.length; i++)
  	{
- 		if (abs(mouseX - colonies[i].bacX) <= 50 || abs(mouseY - colonies[i].bacY) <= 50)
+ 		if (abs(mouseX - colonies[i].bacX) <= 50 && abs(mouseY - colonies[i].bacY) <= 50)
  			colonies[i].run();
  		else
  			colonies[i].move();
