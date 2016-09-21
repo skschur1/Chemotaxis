@@ -7,9 +7,7 @@ int foodY = 300;
  	frameRate(20); 
  	colonies = new Bacteria[200];
  	for(int i = 0; i < colonies.length; i++)
- 	{
  		colonies[i] = new Bacteria(300,300);
- 	}
  }   
  void draw()   
  {    
@@ -36,40 +34,24 @@ int foodY = 300;
  	void move()
  	{
  		if(bacX >= foodX)
- 		{
  			bacX = bacX - (int)(Math.random()*9);
- 		}
  		else 
- 		{
  			bacX = bacX + (int)(Math.random()*9);	
- 		}
  		if(bacY >= foodY)
- 		{
  			bacY = bacY - (int)(Math.random()*9);
- 		}
  		else
- 		{
  			bacY = bacY + (int)(Math.random()*9);	
- 		}
  	}
  	void run()
  	{
  		if(bacX <= mouseX)
- 		{
- 			bacX = bacX - (int)(Math.random()*9);
- 		}
+ 			bacX = bacX - (int)(Math.random()*9 + 4);
  		else 
- 		{
- 			bacX = bacX + (int)(Math.random()*9);	
- 		}
+ 			bacX = bacX + (int)(Math.random()*9 + 4);	
  		if(bacY <= mouseY)
- 		{
- 			bacY = bacY - (int)(Math.random()*9);
- 		}
+ 			bacY = bacY - (int)(Math.random()*9 + 4);
  		else
- 		{
- 			bacY = bacY + (int)(Math.random()*9);	
- 		}
+ 			bacY = bacY + (int)(Math.random()*9 + 4) ;
  	}
  	void show()
  	{
@@ -85,19 +67,11 @@ int foodY = 300;
  void keyPressed()
  {
  	if(keyCode == UP)
- 	{
  		foodY-=8;
- 	}
  	else if (keyCode == DOWN)
- 	{
  		foodY+=8;
- 	}
  	else if (keyCode == LEFT)
- 	{
  		foodX-=8;	
- 	}
  	else if ( keyCode == RIGHT)
- 	{
  		foodX+=8;
- 	}
  }
